@@ -10,9 +10,11 @@ import com.bilgeadam.exception.CustomerManagerException;
 import com.bilgeadam.exception.ErrorType;
 import com.bilgeadam.mapper.ICustomerMapper;
 import com.bilgeadam.repository.ICustomerRepository;
+import com.bilgeadam.repository.IOrderRepository;
 import com.bilgeadam.repository.entity.Customer;
-import com.bilgeadam.repository.entity.Order;
 import com.bilgeadam.repository.entity.enums.EStatus;
+import com.bilgeadam.repository.entity.jointable.OrderCustomer;
+import com.bilgeadam.repository.joinrepo.IOrderCustomerRepository;
 import com.bilgeadam.utility.CodeGenerator;
 import com.bilgeadam.utility.ServiceManager;
 import org.springframework.stereotype.Service;
@@ -25,10 +27,13 @@ public class CustomerService extends ServiceManager<Customer,Long> {
 
     private final ICustomerRepository repository;
 
+    private final IOrderCustomerRepository orderCustomerRepository;
 
-    public CustomerService(ICustomerRepository repository) {
+
+    public CustomerService(ICustomerRepository repository, IOrderCustomerRepository orderCustomerRepository) {
         super(repository);
         this.repository = repository;
+        this.orderCustomerRepository = orderCustomerRepository;
     }
 
     public RegisterResponseDto register(RegisterRequestDto dto){
@@ -76,5 +81,9 @@ public class CustomerService extends ServiceManager<Customer,Long> {
 
     public List<Customer> findAll(){
         return repository.findAll();
+    }
+
+    public List<OrderCustomer> customerOrders(Long customerId){
+        return  orderCustomerRepository.customerOrders(customerId);
     }
 }

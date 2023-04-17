@@ -19,4 +19,8 @@ public class ApiUrls {
     public static final String FIND_BY_ID = "/find-by-id";
     public static final String FIND_ALL = "/find-all";
     public static final String ACTIVATE_STATUS = "/activate-status";
+    public static final String ORDER_CUSTOMER = "/order-customer" ;
+    public static final String ORDERS_RESTAURANT = "/orders-restaurant";
+    public static final String ALL_OORDERS = "/all-orders";
+    public static final String RESTAURANT_PRODUCTS = "/restaurant_products";
 }

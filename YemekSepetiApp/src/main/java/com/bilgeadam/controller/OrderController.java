@@ -3,6 +3,8 @@ package com.bilgeadam.controller;
 import com.bilgeadam.dto.request.OrderSaveRequestDto;
 import com.bilgeadam.repository.entity.Order;
 import com.bilgeadam.repository.entity.Product;
+import com.bilgeadam.repository.entity.jointable.AllOrder;
+import com.bilgeadam.repository.entity.jointable.OrderCustomer;
 import com.bilgeadam.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +30,10 @@ public class OrderController {
     @GetMapping(FIND_ALL)
     public ResponseEntity<List<Order>> findALl(){
         return ResponseEntity.ok(orderService.findAll());
+    }
+
+    @GetMapping(ALL_OORDERS)
+    public List<AllOrder> allOrders(){
+        return  orderService.allOrders();
     }
 }

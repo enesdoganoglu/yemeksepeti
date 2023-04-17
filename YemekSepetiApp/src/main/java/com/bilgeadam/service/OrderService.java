@@ -8,7 +8,8 @@ import com.bilgeadam.repository.ICustomerRepository;
 import com.bilgeadam.repository.IOrderRepository;
 import com.bilgeadam.repository.entity.Customer;
 import com.bilgeadam.repository.entity.Order;
-import com.bilgeadam.repository.entity.Product;
+import com.bilgeadam.repository.entity.jointable.AllOrder;
+import com.bilgeadam.repository.joinrepo.IAllOrders;
 import com.bilgeadam.utility.CodeGenerator;
 import com.bilgeadam.utility.ServiceManager;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,12 @@ import java.util.Optional;
 public class OrderService extends ServiceManager<Order,Long> {
 
     private final ICustomerRepository customerRepository;
+    private final IAllOrders allOrdersRepository;
     private final IOrderRepository orderRepository;
-    public OrderService(ICustomerRepository customerRepository, IOrderRepository orderRepository) {
+    public OrderService(ICustomerRepository customerRepository, IAllOrders allOrdersRepository, IOrderRepository orderRepository) {
         super(orderRepository);
         this.customerRepository = customerRepository;
+        this.allOrdersRepository = allOrdersRepository;
         this.orderRepository = orderRepository;
     }
 
@@ -45,6 +48,10 @@ public class OrderService extends ServiceManager<Order,Long> {
 
     public List<Order> findAll(){
         return orderRepository.findAll();
+    }
+
+    public List<AllOrder> allOrders(){
+        return  allOrdersRepository.allOrders();
     }
 
 }

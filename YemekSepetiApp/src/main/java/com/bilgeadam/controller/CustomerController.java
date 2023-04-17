@@ -6,6 +6,7 @@ import com.bilgeadam.dto.request.customer.LoginRequestDto;
 import com.bilgeadam.dto.request.customer.RegisterRequestDto;
 import com.bilgeadam.dto.response.RegisterResponseDto;
 import com.bilgeadam.repository.entity.Customer;
+import com.bilgeadam.repository.entity.jointable.OrderCustomer;
 import com.bilgeadam.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -43,6 +44,11 @@ public class CustomerController {
     @GetMapping(FIND_ALL)
     public ResponseEntity<List<Customer>> findAll(){
         return ResponseEntity.ok(customerService.findAll());
+    }
+
+    @GetMapping(ORDER_CUSTOMER)
+    public List<OrderCustomer> customerOrders(Long customerId){
+        return  customerService.customerOrders(customerId);
     }
 
 }
